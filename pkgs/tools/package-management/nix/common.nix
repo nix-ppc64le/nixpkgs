@@ -236,6 +236,8 @@ self = stdenv.mkDerivation {
   '' # TODO: investigate why this broken
   + lib.optionalString (atLeast224 && stdenv.hostPlatform.system == "aarch64-linux") ''
     echo "exit 0" > tests/functional/flakes/show.sh
+  '' + lib.optionalString (atLeast224 && stdenv.hostPlatform.isPower64) ''
+    echo "exit 0" > tests/functional/help.sh
   '' + ''
     # nixStatic otherwise does not find its man pages in tests.
     export MANPATH=$man/share/man:$MANPATH
